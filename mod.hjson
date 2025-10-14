@@ -1,0 +1,7 @@
+name: "dark-afflict"
+displayName: "Dark Afflict"
+author: "Malthael972"
+description: "Java-based Afflict clone (Dark Afflict)."
+version: "1.0.0"
+minGameVersion: 146
+main: "darkafflict.DarkAfflictMod"
