@@ -3,7 +3,7 @@
   "damage": 80,
   "length": 240,
   "width": 3.5,
-  "colors": ["4c4cff", "7a7aff", "ffffff"],
+  "colors": ["ff0000", "660000", "000000"],
   "hitEffect": "hitLaser",
   "drawSize": 420,
   "lifetime": 60,
