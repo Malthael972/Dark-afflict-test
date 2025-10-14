@@ -1,6 +1,5 @@
 {
   "type": "LaserTurret",
-  "name": "dark-afflict",
   "localizedName": "Dark Afflict",
   "description": "A dark-energy laser turret that fires twin mirrored beams of energy.",
   "health": 2600,
@@ -14,18 +13,7 @@
     "shots": 2,
     "spread": 6
   },
-  "shootType": {
-    "type": "ContinuousLaserBulletType",
-    "damage": 80,
-    "length": 240,
-    "width": 3.5,
-    "colors": ["ff0000", "660000", "000000"],
-    "lifetime": 60,
-    "shake": 1,
-    "sideAngle": 15,
-    "sideWidth": 1.5,
-    "sideLength": 60
-  },
+  "shootType": "dark-afflict-laser",
   "requirements": [
     {"item": "silicon", "amount": 150},
     {"item": "beryllium", "amount": 180},
