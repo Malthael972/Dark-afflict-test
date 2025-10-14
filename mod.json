@@ -1,0 +1,9 @@
+{
+  "name": "dark-afflict",
+  "displayName": "Dark Afflict",
+  "author": "Malthael972",
+  "description": "A Java-based clone of the Afflict turret with dual dark-energy beams.",
+  "version": "1.0",
+  "minGameVersion": "146",
+  "main": "darkafflict.DarkAfflictMod"
+}
