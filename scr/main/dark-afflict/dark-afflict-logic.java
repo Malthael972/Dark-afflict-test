@@ -1,50 +1,55 @@
-package dark-afflict;
+package darkafflict;
 
-import mindustry.world.blocks.defense.turrets.Turret;
-import mindustry.world.blocks.defense.turrets.Turret.TurretBuild;
-import mindustry.content.StatusEffects;
-import mindustry.gen.Sounds;
-import mindustry.type.BulletType;
-import mindustry.type.Weapon;
-import mindustry.entities.Effect;
-import mindustry.world.Block;
-import mindustry.Vars;
-import mindustry.entities.bullet.BasicBulletType;
+import mindustry.mod.*;
+import mindustry.content.*;
+import mindustry.type.*;
+import mindustry.entities.bullet.*;
+import mindustry.world.blocks.defense.turrets.*;
+import mindustry.world.meta.*;
+import mindustry.ctype.*;
+import mindustry.gen.*;
 
-public class AfflictLogic extends Turret {
-    public float heatUse;
-    public float maxHeatEff;
+public class DarkAfflictMod extends Mod {
 
-    public AfflictLogic(String name) {
-        super(name);
-        // you might need to set additional fields (power use, etc.)
+    public DarkAfflictMod() {
+        // Constructor (runs before content is loaded)
+        Log.info("Dark Afflict mod loaded successfully.");
     }
 
-    public class AfflictBuild extends TurretBuild {
-        public float heat;  // current heat input level
-        int tickCounter = 0;
+    @Override
+    public void loadContent() {
+        Log.info("Loading Dark Afflict content...");
 
-        @Override
-        public void updateTile() {
-            super.updateTile();
-            // Every tick, consume heat/power, check if able to fire
-            // Pseudocode:
-            // if (hasSufficientPower() && heat ≥ heatUse) then active = true else inactive
-            // you may accumulate heat input from heaters
-        }
+        // Example: clone of the Afflict turret behavior
+        LaserTurret darkAfflict = new LaserTurret("dark-afflict") {{
+            requirements(Category.turret, with(Items.silicon, 150, Items.beryllium, 180, Items.tungsten, 130));
+            localizedName = "Dark Afflict";
+            description = "A dark-energy version of the Afflict turret that fires twin mirrored beams.";
+            size = 3;
+            health = 2600;
+            reload = 90f;
+            range = 240f;
+            powerUse = 15f;
+            shootSound = Sounds.laser;
 
-        @Override
-        public boolean shouldConsume() {
-            // override so it only expends ammunition if active
-            return isActive();
-        }
+            shoot = new ShootAlternate() {{
+                shots = 2;
+                spread = 6f;
+            }};
 
-        @Override
-        public void shoot(Weapon weapon, BulletType type) {
-            super.shoot(weapon, type);
-            // after orb is launched, schedule fragment spawning on orb updates
-        }
-
-        // Possibly override the bullet on-hit logic or attach a listener to spawn fragments
+            shootType = new ContinuousLaserBulletType() {{
+                damage = 80f;
+                length = 240f;
+                width = 3.5f;
+                colors = new Color[]{Color.valueOf("ff0000"), Color.valueOf("660000"), Color.valueOf("000000")};
+                hitEffect = Fx.hitLaser;
+                lifetime = 60f;
+                shake = 1f;
+                sideAngle = 15f;
+                sideWidth = 1.5f;
+                sideLength = 60f;
+                largeHit = true;
+            }};
+        }};
     }
 }
