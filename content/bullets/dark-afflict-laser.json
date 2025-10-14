@@ -1,0 +1,15 @@
+{
+  "type": "ContinuousLaserBulletType",
+  "damage": 80,
+  "length": 240,
+  "width": 3.5,
+  "colors": ["4c4cff", "7a7aff", "ffffff"],
+  "hitEffect": "hitLaser",
+  "drawSize": 420,
+  "lifetime": 60,
+  "shake": 1,
+  "sideAngle": 15,
+  "sideWidth": 1.5,
+  "sideLength": 60,
+  "largeHit": true
+}
