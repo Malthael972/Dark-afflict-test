@@ -1,0 +1,74 @@
+{
+  "type": "PowerHeatTurret",  // a custom turret type that requires both power and heat
+  "name": "afflict",
+  "displayName": "dark-afflict",
+  "description": "Fires a charged orb that sheds flak fragments as it travels. Requires power + heat.",
+  "size": 4,
+  "squareSprite": false,
+  "targetGround": true,
+  "targetAir": true,
+  "health": 3520,
+  "reload": 100,                // ticks between each orb shot → ~0.6/sec (assuming 60 ticks/sec)  
+  "range": 43.75 * 8,           // convert to game units if needed (8 units per tile)  
+  "inaccuracy": 1,
+  "recoil": 1.2,
+  "rotateSpeed": 1.5,
+  "shootSound": "largeOrb",    // hypothetical sound
+  "requirements": [
+    "surge-alloy/200",
+    "silicon/300",
+    "graphite/300"
+  ],
+  "powerUse": 300,              // power units per second (or per tick, adjust accordingly)
+  "heatUse": 10,                // heat units required per shot or per second
+  "maxHeatEfficiency": 20,      // when fully heated input, 200% efficiency
+  "ammoTypes": {
+    "power": {                  // Using “power” as pseudo-ammo (or you might use a dummy ammo)
+      "type": "OrbBulletType",
+      "damage": 180,
+      "buildingDamageMultiplier": 0.5,
+      "pierce": 2,
+      "speed": 4,
+      "lifetime": 120,
+      "trailLength": 30,
+      "trailWidth": 4,
+      "trailColor": "ffaaff",
+      "lightColor": "ffccff",
+      "shootEffect": {
+        "type": "MultiEffect",
+        "effects": [
+          {
+            "type": "ParticleEffect",
+            "region": "circle",
+            "particles": 20,
+            "sizeFrom": 6,
+            "sizeTo": 1,
+            "lifetime": 60,
+            "colorFrom": "ffccff88",
+            "colorTo": "ffccff00",
+            "lightColor": "ffccbb88",
+            "lengthOffset": 10
+          }
+        ]
+      },
+      "fragBullets": {
+        "interval": 5,        // every 5 ticks emit fragment(s)
+        "spread": 45,
+        "count": 20,
+        "type": {
+          "type": "BasicBulletType",
+          "damage": 35,
+          "pierce": 3,
+          "buildingDamageMultiplier": 0.3,
+          "speed": 6,
+          "lifetime": 40,
+          "homingPower": 0.1,
+          "homingRange": 50,
+          "trailLength": 10,
+          "trailColor": "ff99ff",
+          "lightColor": "ffbbff"
+        }
+      }
+    }
+  }
+}
