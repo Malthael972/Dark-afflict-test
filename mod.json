@@ -1,0 +1,12 @@
+{
+  "name": "dark-afflict-mod",
+  "displayName": "[red]Dark Afflict",
+  "author": "YourName",
+  "main": "darkafflict.DarkAfflictMod",
+  "description": "Adds the Dark Afflict turret - a red and black themed dual-barrel variant.",
+  "version": "1.0",
+  "minGameVersion": "146",
+  "dependencies": [],
+  "hidden": false,
+  "java": true
+}
