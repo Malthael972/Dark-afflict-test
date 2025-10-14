@@ -1,0 +1,48 @@
+{
+  "type": "OrbBulletType",
+  "name": "dark-afflict-orb",
+  "damage": 180,
+  "buildingDamageMultiplier": 0.5,
+  "pierce": 2,
+  "speed": 4,
+  "lifetime": 120,
+  "trailLength": 30,
+  "trailWidth": 4,
+  "trailColor": "ffaaff",
+  "lightColor": "ffccff",
+  "shootEffect": {
+    "type": "MultiEffect",
+    "effects": [
+      {
+        "type": "ParticleEffect",
+        "region": "circle",
+        "particles": 20,
+        "sizeFrom": 6,
+        "sizeTo": 1,
+        "lifetime": 60,
+        "colorFrom": "ffccff88",
+        "colorTo": "ffccff00",
+        "lightColor": "ffccbb88",
+        "lengthOffset": 10
+      }
+    ]
+  },
+  "fragBullets": {
+    "interval": 5,
+    "spread": 45,
+    "count": 20,
+    "type": {
+      "type": "BasicBulletType",
+      "damage": 35,
+      "pierce": 3,
+      "buildingDamageMultiplier": 0.3,
+      "speed": 6,
+      "lifetime": 40,
+      "homingPower": 0.1,
+      "homingRange": 50,
+      "trailLength": 10,
+      "trailColor": "ff99ff",
+      "lightColor": "ffbbff"
+    }
+  }
+}
