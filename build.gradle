@@ -1,4 +1,4 @@
-apply plugin: "java"
+apply plugin: 'java'
 
 version '1.0'
 targetCompatibility = 8
@@ -6,7 +6,7 @@ sourceCompatibility = 16
 
 repositories {
     mavenCentral()
-    maven{ url 'https://www.jitpack.io' }
+    maven { url 'https://jitpack.io' }
 }
 
 ext {
@@ -14,30 +14,30 @@ ext {
 }
 
 dependencies {
-    compileOnly "com.github.Anuken.Arc:arc-core:v146"
-    compileOnly "com.github.Anuken.Mindustry:core:v146"
+    compileOnly "com.github.Anuken.Arc:arc-core:v145"
+    compileOnly "com.github.Anuken.Mindustry:core:v145"
     annotationProcessor "com.github.Anuken:jabel:93fde537c7"
 }
 
 task jarAndroid {
     dependsOn "jar"
     doLast {
-        if(!sdkRoot || !file(sdkRoot).exists()) throw new GradleException("No Android SDK found.")
-        
-        def platformRoot = file("$sdkRoot/platforms/").listFiles().sort().reverse().find{ f -> new File(f, "android.jar").exists() }
+        if(!(sdkRoot || !file(sdkRoot).exists())) throw new GradleException("No Android SDK found.")
+
+        def platformRoot = file("$sdkRoot/platforms/").listFiles().sort().reverse().find{ f -> new File(f, "android.jar").exists()}
         if(!platformRoot) throw new GradleException("No android.jar found.")
-        
-        def d8 = file("$sdkRoot/build-tools/").listFiles().sort().reverse().find{ f -> new File(f, "d8").exists() || new File(f, "d8.bat").exists() }
+
+        def d8 = file("$sdkRoot/build-tools/").listFiles().sort().reverse().find{ f -> new File(f, "d8").exists() || new File(f, "d8.bat").exists()}
         if(!d8) throw new GradleException("No d8 found.")
-        
+
         def d8Binary = new File(d8, System.getProperty("os.name").toLowerCase().contains("windows") ? "d8.bat" : "d8")
-        def deps = (configurations.compileClasspath.asList() + configurations.runtimeClasspath.asList() + [new File(platformRoot, "android.jar")]).collect{ "--classpath $it.path" }.join(" ")
-        
+        def deps = (configurations.compileClasspath.asList() + configurations.runtimeClasspath.asList() + [new File(platformRoot, "android.jar")]).collect().join(" ")
+
         delete("build/libs/${rootProject.name}Android.jar")
-        
+
         exec{
             workingDir file("build/libs")
-            commandLine d8Binary.absolutePath, "--min-api", "14", "--output", "${rootProject.name}Android.jar", deps, "${rootProject.name}Desktop.jar"
+            commandLine d8Binary.absolutePath, "--min-api", "14", "--output", "${rootProject.name}Android.jar", deps, "${rootProject.name}.jar"
         }
     }
 }
@@ -52,7 +52,7 @@ jar {
 task deploy(type: Jar) {
     dependsOn jarAndroid
     archiveFileName = "${rootProject.name}.jar"
-    from{ [zipTree("build/libs/${rootProject.name}Desktop.jar"), zipTree("build/libs/${rootProject.name}Android.jar")] }
+    from{ zipTree("build/libs/${rootProject.name}Desktop.jar"), zipTree("build/libs/${rootProject.name}Android.jar") }
     doLast{
         delete("build/libs/${rootProject.name}Desktop.jar")
         delete("build/libs/${rootProject.name}Android.jar")
