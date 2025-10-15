@@ -22,7 +22,7 @@ dependencies {
 task jarAndroid {
     dependsOn "jar"
     doLast {
-        if(!(sdkRoot || !file(sdkRoot).exists())) throw new GradleException("No Android SDK found.")
+        if(!(sdkRoot && file(sdkRoot).exists())) throw new GradleException("No Android SDK found.")
 
         def platformRoot = file("$sdkRoot/platforms/").listFiles().sort().reverse().find{ f -> new File(f, "android.jar").exists()}
         if(!platformRoot) throw new GradleException("No android.jar found.")
@@ -31,13 +31,14 @@ task jarAndroid {
         if(!d8) throw new GradleException("No d8 found.")
 
         def d8Binary = new File(d8, System.getProperty("os.name").toLowerCase().contains("windows") ? "d8.bat" : "d8")
-        def deps = (configurations.compileClasspath.asList() + configurations.runtimeClasspath.asList() + [new File(platformRoot, "android.jar")]).collect().join(" ")
-
+        
+        def jarFile = file("build/libs/${rootProject.name}.jar")
+        
         delete("build/libs/${rootProject.name}Android.jar")
 
         exec{
             workingDir file("build/libs")
-            commandLine d8Binary.absolutePath, "--min-api", "14", "--output", "${rootProject.name}Android.jar", deps, "${rootProject.name}.jar"
+            commandLine d8Binary.absolutePath, "--min-api", "14", "--output", "${rootProject.name}Android.jar", jarFile.absolutePath
         }
     }
 }
