@@ -6,7 +6,7 @@ sourceCompatibility = 16
 
 repositories {
     mavenCentral()
-    maven { url 'https://jitpack.io' }
+    maven { url 'https://raw.githubusercontent.com/Anuken/MindustryJitpack/master' }
 }
 
 ext {
@@ -14,8 +14,8 @@ ext {
 }
 
 dependencies {
-    compileOnly "com.github.Anuken.Arc:arc-core:v147"
-    compileOnly "com.github.Anuken:Mindustry:v147"
+    compileOnly "com.github.Anuken.Arc:arc-core:v146"
+    compileOnly "com.github.Anuken.Mindustry:core:v146"
     annotationProcessor "com.github.Anuken:jabel:93fde537c7"
 }
 
