@@ -52,7 +52,12 @@ jar {
 task deploy(type: Jar) {
     dependsOn jarAndroid
     archiveFileName = "${rootProject.name}.jar"
-    from{ zipTree("build/libs/${rootProject.name}Desktop.jar"), zipTree("build/libs/${rootProject.name}Android.jar") }
+    from{ 
+        zipTree("build/libs/${rootProject.name}Desktop.jar")
+    }
+    from{ 
+        zipTree("build/libs/${rootProject.name}Android.jar")
+    }
     doLast{
         delete("build/libs/${rootProject.name}Desktop.jar")
         delete("build/libs/${rootProject.name}Android.jar")
