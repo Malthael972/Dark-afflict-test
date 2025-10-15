@@ -6,7 +6,7 @@ sourceCompatibility = 16
 
 repositories {
     mavenCentral()
-    maven { url 'https://raw.githubusercontent.com/Anuken/MindustryJitpack/master' }
+    maven { url 'https://raw.githubusercontent.com/Zelaux/MindustryRepo/master/repository' }
 }
 
 ext {
