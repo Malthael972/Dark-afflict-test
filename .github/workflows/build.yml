@@ -9,10 +9,12 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: '17'
+      - uses: gradle/gradle-build-action@v2
+        with:
+          gradle-version: 7.6
       - uses: android-actions/setup-android@v2
-      - run: chmod +x gradlew
-      - run: ./gradlew deploy
-      - uses: actions/upload-artifact@v3
+      - run: gradle deploy
+      - uses: actions/upload-artifact@v4
         with:
           name: dark-afflict-mod
           path: build/libs/dark-afflict.jar
